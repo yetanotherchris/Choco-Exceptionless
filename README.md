@@ -27,4 +27,4 @@ The package creates a website that binds to port 80, updates the configuration f
 
 Example:
 
-    choco install Exceptionless -packageParameters "/Port:82 /MongoDataDir:'D:' /WebsiteDomain:'www.example.com'"
+    choco install Exceptionless -packageParameters "/port:82 /mongoDataDir:'D:' /websiteDomain:'www.example.com'"
