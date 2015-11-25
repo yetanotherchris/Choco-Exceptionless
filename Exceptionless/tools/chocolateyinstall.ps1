@@ -1,4 +1,5 @@
-﻿param ([string] $mongoDataDir = "$env:ChocolateyInstall\lib\mongodb\tools", [int] $websitePort = 80, [string] $websiteDomain = "localhost")
+#https://github.com/chocolatey/choco/wiki/How-To-Parse-PackageParameters-Argument
+param ([string] $mongoDataDir = "$env:ChocolateyInstall\lib\mongodb\tools", [int] $websitePort = 80, [string] $websiteDomain = "localhost")
 
 $ErrorActionPreference = 'Stop';
 
