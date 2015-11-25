@@ -21,9 +21,9 @@ The package creates a website that binds to port 80, updates the configuration f
 
 ### Parameters
 
-/port - The website port to use, default is 80.
-/mongoDataDir - The data directory to put the mongo binaries and database, for example "D:"
-/websiteDomain - The domain that the site binds to, default is "localhost".
+- /port - The website port to use, default is 80.
+- /mongoDataDir - The data directory to put the mongo binaries and database, for example "D:"
+- /websiteDomain - The domain that the site binds to, default is "localhost".
 
 Example:
 
