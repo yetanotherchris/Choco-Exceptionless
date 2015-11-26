@@ -84,8 +84,8 @@ function Update-ExceptionlessConfigs([string] $unzipDir, [string] $websiteDomain
     Write-Host "Updating exceptionless web.config" -ForegroundColor Cyan
     $webConfig = "$unzipDir\wwwroot\web.config"
     $doc = (gc $webConfig) -as [xml]
-    $doc.SelectSingleNode('//appSettings/add[@key="BaseURL"]/@value').'#text' = 'http://$websiteDomain/#'
-    $doc.SelectSingleNode('//appSettings/add[@key="WebsiteMode"]/@value').'#text' = 'Production'
+    $doc.SelectSingleNode('//appSettings/add[@key="BaseURL"]/@value')."#text" = "http://$websiteDomain/#"
+    $doc.SelectSingleNode('//appSettings/add[@key="WebsiteMode"]/@value')."#text" = "Production"
     $doc.Save($webConfig)
 
     # Update app.config.*.js
@@ -94,8 +94,9 @@ function Update-ExceptionlessConfigs([string] $unzipDir, [string] $websiteDomain
 
     Write-Host "Updating exceptionless $jsConfigFilePath" -ForegroundColor Cyan
 
+    $domainAndPort = $websiteDomain +":"+ $websitePort;
     $content = [System.IO.File]::ReadAllText($jsConfigFilePath)
-    $content = $content.Replace(".constant('BASE_URL', 'http://localhost:50000')",".constant('BASE_URL', 'http://$websiteDomain' +':'+ '$websitePort')")
+    $content = $content.Replace(".constant('BASE_URL', 'http://localhost:50000')",".constant('BASE_URL', 'http://$domainAndPort')")
     [System.IO.File]::WriteAllText($jsConfigFilePath, $content)
 }
 
