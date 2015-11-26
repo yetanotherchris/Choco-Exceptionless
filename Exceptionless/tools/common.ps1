@@ -67,14 +67,6 @@ function Unzip-Exceptionless([string] $url, [string] $unzipDir)
     # Download and unzip the Exceptionless.zip file
     $url64 = $url
 
-    $packageArgs = @{
-      packageName   = $packageName
-      unzipLocation = $unzipDir
-      fileType      = 'EXE' #only one of these: exe, msi, msu
-      url           = $url
-      url64bit      = $url64
-    }
-
     Install-ChocolateyZipPackage $packageName $url $unzipDir
 }
 
@@ -137,8 +129,8 @@ function Add-ExceptionlessAppPool([string] $appPoolName)
 
 function Add-ExceptionlessWebsite([string] $unzipDir, [string] $websiteName, [string] $websiteDomain, [int] $websitePort)
 {
-    Write-Host "  Adding website $websiteName (id:$websitePort, port: $websitePort, path: $websitePath)"
-
     $websitePath = "$unzipDir\wwwroot"
+
+    Write-Host "  Adding website $websiteName (id:$websitePort, port: $websitePort, path: $websitePath)"
     New-Website -Name $websiteName -Id $websitePort -Port $websitePort -PhysicalPath $websitePath -ApplicationPool $appPoolName -Force  | Out-Null   
 }
