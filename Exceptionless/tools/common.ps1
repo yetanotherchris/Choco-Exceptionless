@@ -3,10 +3,11 @@
 function Parse-Parameters($arguments)
 {
     $packageParameters = $env:chocolateyPackageParameters
+    Write-Host "Package parameters: $packageParameters"
 
     if ($packageParameters)
     {
-          $match_pattern = '(?:\s*)(?<=[-|/])(?<name>\w*)[:|=]("((?<value>.*?)(?<!\\)")|(?<value>[\w]*))'
+          $match_pattern = "(?:\s*)(?<=[-|/])(?<name>\w*)[:|=]('((?<value>.*?)(?<!\\)')|(?<value>[\w]*))"
 
           if ($packageParameters -match $match_pattern )
           {
