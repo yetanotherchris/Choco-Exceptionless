@@ -17,8 +17,12 @@ $arguments["websitePort"] = 80;
 $arguments["websiteDomain"] = "localhost";
 Parse-Parameters($arguments);
 
+$mongoDataDir = $arguments["mongoDataDir"];
+$websitePort = $arguments["websitePort"];
+$websiteDomain = $arguments["websiteDomain"];
+
 # Install
-Install-Dependencies
+Install-Dependencies $mongoDataDir
 Configure-ElasticSearch
 Unzip-Exceptionless $url $unzipDir
 Update-ExceptionlessConfigs $unzipDir $websiteDomain $websitePort

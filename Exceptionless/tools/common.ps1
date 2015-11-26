@@ -28,7 +28,7 @@ function Parse-Parameters($arguments)
     }
 }
 
-function Install-Dependencies()
+function Install-Dependencies([string] $mongoDataDir)
 {
     # Dependencies that can't be done via the nuspec file (or, I don't know how to)
     choco install dotnet4.6 -y #4.6.00081.20150925
