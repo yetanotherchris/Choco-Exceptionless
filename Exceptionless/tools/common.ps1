@@ -80,27 +80,27 @@ function Unzip-Exceptionless([string] $url, [string] $unzipDir)
 
 function Update-ExceptionlessConfigs([string] $unzipDir, [string] $websiteDomain, [int] $websitePort)
 {
+    $domainAndPort = $websiteDomain +":"+ $websitePort;
+
     # Update Exceptionless web.config
     Write-Host "Updating exceptionless web.config" -ForegroundColor Cyan
     $webConfig = "$unzipDir\wwwroot\web.config"
     $doc = (gc $webConfig) -as [xml]
-    $doc.SelectSingleNode('//appSettings/add[@key="BaseURL"]/@value')."#text" = "http://$websiteDomain/#"
+    $doc.SelectSingleNode('//appSettings/add[@key="BaseURL"]/@value')."#text" = "http://$domainAndPort/#"
     $doc.SelectSingleNode('//appSettings/add[@key="WebsiteMode"]/@value')."#text" = "Production"
     $doc.Save($webConfig)
 
     # Update app.config.*.js
+    Write-Host "Updating exceptionless $jsConfigFilePath" -ForegroundColor Cyan
     $jsConfigFile = (dir "$unzipDir\wwwroot\app.config.*.js")[0]
     $jsConfigFilePath = $jsConfigFile.FullName
 
-    Write-Host "Updating exceptionless $jsConfigFilePath" -ForegroundColor Cyan
-
-    $domainAndPort = $websiteDomain +":"+ $websitePort;
     $content = [System.IO.File]::ReadAllText($jsConfigFilePath)
     $content = $content.Replace(".constant('BASE_URL', 'http://localhost:50000')",".constant('BASE_URL', 'http://$domainAndPort')")
     [System.IO.File]::WriteAllText($jsConfigFilePath, $content)
 }
 
-function Remove-Website([string] $appPoolName, [string] $websiteName)
+function Remove-ExceptionlessWebsite([string] $appPoolName, [string] $websiteName)
 {
     if (Test-WebAppPool $appPoolName)
     {
@@ -123,7 +123,7 @@ function Test-Website($Name) {
     return Test-Path "IIS:\Sites\$Name"
 }
 
-function Add-AppPool([string] $appPoolName)
+function Add-ExceptionlessAppPool([string] $appPoolName)
 {
     Write-Host "  Adding app pool $appPoolName (v4, localservice)"
 
@@ -135,7 +135,7 @@ function Add-AppPool([string] $appPoolName)
     Set-ItemProperty "IIS:\AppPools\$appPoolName" processModel.pingingEnabled -value true #disable for debuging
 }
 
-function Add-Website([string] $unzipDir, [string] $websiteName, [string] $websiteDomain, [int] $websitePort)
+function Add-ExceptionlessWebsite([string] $unzipDir, [string] $websiteName, [string] $websiteDomain, [int] $websitePort)
 {
     Write-Host "  Adding website $websiteName (id:$websitePort, port: $websitePort, path: $websitePath)"
 

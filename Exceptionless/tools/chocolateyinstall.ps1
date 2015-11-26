@@ -26,8 +26,8 @@ Install-Dependencies $mongoDataDir
 Configure-ElasticSearch
 Unzip-Exceptionless $url $unzipDir
 Update-ExceptionlessConfigs $unzipDir $websiteDomain $websitePort
-Remove-Website $appPoolName $websiteName
-Add-AppPool $appPoolName 
-Add-Website $unzipDir $websiteName $websiteDomain $websitePort
+Remove-ExceptionlessWebsite $appPoolName $websiteName
+Add-ExceptionlessAppPool $appPoolName 
+Add-ExceptionlessWebsite $unzipDir $websiteName $websiteDomain $websitePort
 
 Write-Host "Done. You will probably need to restart now." -ForegroundColor Green

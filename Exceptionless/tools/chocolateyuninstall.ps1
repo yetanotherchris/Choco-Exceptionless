@@ -4,6 +4,6 @@
 $appPoolName = "Exceptionless"
 $websiteName = "Exceptionless"
 
-Remove-Website $appPoolName $websiteName
+Remove-ExceptionlessWebsite $appPoolName $websiteName
 
 # The dependencies are left intact.
