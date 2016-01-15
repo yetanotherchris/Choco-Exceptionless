@@ -4,9 +4,9 @@
   <metadata>
     <id>exceptionless</id>
     <title>Exceptionless self-host</title>
-    <version>3.1.1822</version>
+    <version>3.1.1822.1</version>
     <authors>Exceptionless</authors>
-    <owners>3.1.1822</owners>
+    <owners>Exceptionless, C.Small</owners>
     <summary>Self hosted installer for exceptionless.</summary>
     <description>Installs Exceptionless, including ElasticSearch, JDK8 and .NET 4.6. You will need to install IIS first and restart once the package install is complete.
 
@@ -23,7 +23,7 @@ Example:
     </description>
     <projectUrl>https://github.com/exceptionless/Exceptionless/wiki/Self-Hosting</projectUrl>
     <packageSourceUrl>https://github.com/yetanotherchris/choco-exceptionless</packageSourceUrl>
-    <tags>exceptionless nlog log4net</tags>
+    <tags>exceptionless admin nlog log4net</tags>
     <copyright></copyright>
     <licenseUrl>https://cdn.rawgit.com/exceptionless/Exceptionless/master/LICENSE.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
