@@ -27,10 +27,15 @@ The package creates a website that binds to port 80, updates the configuration f
 Note: **All argument values should be wrapped in a single quote if they contain anything except numbers/letters.**
 
 - websitePort - The website port to use, default is 80.
-- mongoDataDir - The data directory to put the mongo binaries and database, for example "D:"
-- websiteDomain - The domain that the site binds to, default is "localhost".
+- websiteDomain - The domain that the site binds to, default is "localhost". Do not include "http://".
 
-Example:
+### Example usage:
 
-    choco install Exceptionless -packageParameters "/websitePort:82 /mongoDataDir:'D:' /websiteDomain:'www.example.com'"
-    choco install Exceptionless -packageParameters "-websitePort:8080 -mongoDataDir='c:\mongoland' =websiteDomain='www.contoso.com'"
+Install to port 80:
+
+	`choco install Exceptionless`
+
+
+Custom domain and port:
+
+    `choco install Exceptionless -packageParameters "/websitePort:82 /websiteDomain:'www.example.com'"`

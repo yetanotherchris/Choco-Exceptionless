@@ -8,20 +8,18 @@
     <authors>Exceptionless</authors>
     <owners>3.1.1822</owners>
     <summary>Self hosted installer for exceptionless.</summary>
-    <description>Installs Exceptionless, including MongoDB, ElasticSearch/JDK8 and .NET 4.6. You will need to install IIS first and restart once the package install is complete.
+    <description>Installs Exceptionless, including ElasticSearch, JDK8 and .NET 4.6. You will need to install IIS first and restart once the package install is complete.
 
 ### Parameters
 
 Note: **All argument values should be wrapped in a single quote if they contain anything except numbers/letters.**
 
 - websitePort - The website port to use, default is 80.
-- mongoDataDir - The data directory to put the mongo binaries and database, for example "D:"
-- websiteDomain - The domain that the site binds to, default is "localhost".
+- websiteDomain - The domain that the site binds to, default is "localhost". Do not include "http://".
 
 Example:
 
-    choco install Exceptionless -packageParameters "/websitePort:82 /mongoDataDir:'D:' /websiteDomain:'www.example.com'"
-    choco install Exceptionless -packageParameters "-websitePort:8080 -mongoDataDir='c:\mongoland' =websiteDomain='www.contoso.com'"
+    choco install Exceptionless -packageParameters "/websitePort:82 /websiteDomain:'www.example.com'"
     </description>
     <projectUrl>https://github.com/exceptionless/Exceptionless/wiki/Self-Hosting</projectUrl>
     <packageSourceUrl>https://github.com/yetanotherchris/choco-exceptionless</packageSourceUrl>

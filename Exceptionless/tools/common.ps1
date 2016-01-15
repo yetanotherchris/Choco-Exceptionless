@@ -28,33 +28,42 @@ function Parse-Parameters($arguments)
     }
 }
 
-function Install-Dependencies([string] $mongoDataDir)
+function Test-IisInstalled()
+{
+    $service = Get-WmiObject -Class Win32_Service -Filter "Name='w3svc'";
+    if ($service)
+    {
+        write-host $service.Status
+        if ($service.Status -eq "OK")
+        {
+            return $True;
+        }
+    }
+
+    return $False;
+}
+
+function Install-Dependencies()
 {
     # Dependencies that can't be done via the nuspec file (or, I don't know how to)
     choco install dotnet4.6 -y #4.6.00081.20150925
     choco install jdk8 -y -params "both=true"
     choco install elasticsearch -version 1.7.2 -y
-
-    # Install MongoDB - this is workaround for a bug in the mongodb package
-    $oldSysDrive = $env:systemdrive
-    $env:systemdrive = $mongoDataDir
-    choco install mongodb -y
-    $env:systemdrive = $oldSysDrive
 }
 
 function Configure-ElasticSearch()
 {
     # Setup elasticsearch's config from exceptionless
     Write-Host "Configuring elasticsearch config file" -ForegroundColor Cyan
-    $elasticSearchConfigPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\elasticsearch-1.7.2\config\elasticsearch.yml"
-    wget "https://raw.githubusercontent.com/exceptionless/Exceptionless/master/Libraries/elasticsearch.yml" -OutFile "$elasticSearchConfigPath"
+    $elasticSearchConfigPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\elasticsearch-1.7.2\config\elasticsearch.yml";
+    wget "https://raw.githubusercontent.com/exceptionless/Exceptionless/master/Libraries/elasticsearch.yml" -OutFile "$elasticSearchConfigPath";
 
     # Reload JAVA_HOME variable
     Write-Host "Configuring elasticsearch as a service" -ForegroundColor Cyan
-    $env:JAVA_HOME = [System.Environment]::GetEnvironmentVariable("JAVA_HOME","Machine")
+    $env:JAVA_HOME = [System.Environment]::GetEnvironmentVariable("JAVA_HOME","Machine");
 
     # Install elasticsearch as a service
-    $elasticSearchPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\elasticsearch-1.7.2\bin"
+    $elasticSearchPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\elasticsearch-1.7.2\bin";
     cmd /c "set JAVA_HOME=$env:JAVA_HOME& $elasticSearchPath\service.bat install"
     cmd /c "$elasticSearchPath\service.bat start"
 
