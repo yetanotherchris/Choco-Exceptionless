@@ -28,7 +28,6 @@ $websitePort = $arguments["websitePort"];
 $websiteDomain = $arguments["websiteDomain"];
 
 # Install
-Install-Dependencies
 Configure-ElasticSearch
 Unzip-Exceptionless $url $unzipDir
 Update-ExceptionlessConfigs $unzipDir $websiteDomain $websitePort

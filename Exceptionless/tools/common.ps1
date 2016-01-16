@@ -43,14 +43,6 @@ function Test-IisInstalled()
     return $False;
 }
 
-function Install-Dependencies()
-{
-    # Dependencies that can't be done via the nuspec file (or, I don't know how to)
-    choco install dotnet4.6 -y #4.6.00081.20150925
-    choco install jdk8 -y -params "both=true"
-    choco install elasticsearch -version 1.7.2 -y
-}
-
 function Configure-ElasticSearch()
 {
     # Setup elasticsearch's config from exceptionless

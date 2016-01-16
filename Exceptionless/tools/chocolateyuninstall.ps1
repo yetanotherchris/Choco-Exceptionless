@@ -5,5 +5,3 @@ $appPoolName = "Exceptionless"
 $websiteName = "Exceptionless"
 
 Remove-ExceptionlessWebsite $appPoolName $websiteName
-
-# The dependencies are left intact.
