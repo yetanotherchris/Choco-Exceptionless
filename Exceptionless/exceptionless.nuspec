@@ -4,7 +4,7 @@
   <metadata>
     <id>exceptionless</id>
     <title>Exceptionless self-host</title>
-    <version>3.1.1822.3</version>
+    <version>3.1.1822.4</version>
     <authors>Exceptionless</authors>
     <owners>Exceptionless, C.Small</owners>
     <summary>Self hosted installer for exceptionless.</summary>
