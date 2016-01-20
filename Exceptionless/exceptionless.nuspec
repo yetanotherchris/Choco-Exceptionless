@@ -4,7 +4,7 @@
   <metadata>
     <id>exceptionless</id>
     <title>Exceptionless self-host</title>
-    <version>3.1.1822.4</version>
+    <version>3.1.1822.5</version>
     <authors>Exceptionless</authors>
     <owners>Exceptionless, C.Small</owners>
     <summary>Self hosted installer for exceptionless.</summary>
@@ -30,6 +30,7 @@ Example:
     <iconUrl>https://cdn.rawgit.com/exceptionless/MediaKit/master/icon75x75.png</iconUrl>
     <releaseNotes></releaseNotes>
     <dependencies>
+    	<dependency id="powershell" />
         <dependency id="dotnet4.6" />
         <dependency id="jdk8" />
         <dependency id="elasticsearch" version="1.7.2" />

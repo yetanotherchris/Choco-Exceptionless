@@ -3,8 +3,7 @@
 
 if ((Test-IisInstalled) -eq $False)
 {
-    Write-Host "IIS is not installed, please install it before continuing." -ForegroundColor Red
-    Exit 1
+    throw "IIS is not installed, please install it before continuing."
 }
 
 $ErrorActionPreference = 'Stop';

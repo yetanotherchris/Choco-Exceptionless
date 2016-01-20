@@ -1,18 +1,4 @@
-﻿
-# Support for Win2008/powershell 2 and the IIS module
-# - Windows 7/2008 is version 6.1
-# - Windows 8 is version 6.2
-# - Windows 10 is version 10
-if ([System.Environment]::OSVersion.Version.Major -eq 6 -and [System.Environment]::OSVersion.Version.Minor -le 2)
-{
-    Write-Host "You're on Windows 2008/7"
-    Add-PSSnapin WebAdministration
-}
-else
-{
-    Write-Host "You're on Windows 8/2012+"
-    Import-Module WebAdministration
-}
+﻿Import-Module WebAdministration
 
 function Parse-Parameters($arguments)
 {
