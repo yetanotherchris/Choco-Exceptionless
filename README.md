@@ -33,9 +33,9 @@ Note: **All argument values should be wrapped in a single quote if they contain 
 
 Install to port 80:
 
-	`choco install Exceptionless`
+    choco install Exceptionless
 
 
 Custom domain and port:
 
-    `choco install Exceptionless -packageParameters "/websitePort:82 /websiteDomain:'www.example.com'"`
+    choco install Exceptionless -packageParameters "/websitePort:82 /websiteDomain:'www.example.com'"
