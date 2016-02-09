@@ -1,4 +1,5 @@
-﻿Import-Module WebAdministration
+﻿# This module requires Powershell 4+ which is picked up by the choco Powershell dependency
+Import-Module WebAdministration
 
 function Parse-Parameters($arguments)
 {
@@ -28,26 +29,11 @@ function Parse-Parameters($arguments)
     }
 }
 
-function Test-IisInstalled()
-{
-    $service = Get-WmiObject -Class Win32_Service -Filter "Name='w3svc'";
-    if ($service)
-    {
-        write-host $service.Status
-        if ($service.Status -eq "OK")
-        {
-            return $True;
-        }
-    }
-
-    return $False;
-}
-
 function Configure-ElasticSearch()
 {
     # Setup elasticsearch's config from exceptionless
     Write-Host "Configuring elasticsearch config file" -ForegroundColor Cyan
-    $elasticSearchConfigPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\elasticsearch-1.7.2\config\elasticsearch.yml";
+    $elasticSearchConfigPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\exceptionless-elasticsearch-2.2.0\config\elasticsearch.yml";
     wget "https://raw.githubusercontent.com/exceptionless/Exceptionless/master/Libraries/elasticsearch.yml" -OutFile "$elasticSearchConfigPath";
 
     # Reload JAVA_HOME variable
@@ -55,12 +41,19 @@ function Configure-ElasticSearch()
     $env:JAVA_HOME = [System.Environment]::GetEnvironmentVariable("JAVA_HOME","Machine");
 
     # Install elasticsearch as a service
-    $elasticSearchPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\elasticsearch-1.7.2\bin";
+    $elasticSearchPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\exceptionless-elasticsearch-2.2.0\bin";
     cmd /c "set JAVA_HOME=$env:JAVA_HOME& $elasticSearchPath\service.bat install"
     cmd /c "$elasticSearchPath\service.bat start"
 
     # Set it to auto-start
     sc.exe config elasticsearch-service-x64 start=auto
+    sc.exe start elasticsearch-service-x64
+}
+
+function Delete-ElasticSearchService()
+{
+    sc.exe stop elasticsearch-service-x64
+    sc.exe delete elasticsearch-service-x64    
 }
 
 function Unzip-Exceptionless([string] $url, [string] $unzipDir)
