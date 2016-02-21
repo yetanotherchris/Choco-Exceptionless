@@ -33,7 +33,7 @@ Example:
     	<dependency id="powershell" />
         <dependency id="dotnet4.6" />
         <dependency id="jdk8" />
-        <dependency id="exceptionless-elasticsearch" version="1.7.5" />
+        <dependency id="exceptionless-elasticsearch" version="[1.7.5]" />
     </dependencies>
   </metadata>
   <files>
