@@ -29,8 +29,8 @@ $appPoolName = "Exceptionless";
 $websiteName = "Exceptionless";
 
 $fullVersion = "3.2.2128";
-$url = "https://github.com/exceptionless/Exceptionless/releases/download/v3.2.1/Exceptionless.$version.zip"
-$unzipDir = "$toolsDir\Exceptionless.$version"
+$url = "https://github.com/exceptionless/Exceptionless/releases/download/v3.2.1/Exceptionless.$fullVersion.zip"
+$unzipDir = "$toolsDir\Exceptionless.$fullVersion"
 
 # Parse command line arguments - this function is required because of the context Chocolatey runs in
 $arguments = @{}

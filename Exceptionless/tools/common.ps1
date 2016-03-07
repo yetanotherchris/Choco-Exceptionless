@@ -33,7 +33,7 @@ function Configure-ElasticSearch()
 {
     # Setup elasticsearch's config from exceptionless
     Write-Host "Configuring elasticsearch config file" -ForegroundColor Cyan
-    $elasticSearchConfigPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\exceptionless-elasticsearch-2.2.0\config\elasticsearch.yml";
+    $elasticSearchConfigPath = "$env:ChocolateyInstall\lib\exceptionless-elasticsearch\tools\elasticsearch-1.7.5\config\elasticsearch.yml";
     wget "https://raw.githubusercontent.com/exceptionless/Exceptionless/master/Libraries/elasticsearch.yml" -OutFile "$elasticSearchConfigPath";
 
     # Reload JAVA_HOME variable
@@ -41,7 +41,7 @@ function Configure-ElasticSearch()
     $env:JAVA_HOME = [System.Environment]::GetEnvironmentVariable("JAVA_HOME","Machine");
 
     # Install elasticsearch as a service
-    $elasticSearchPath = "$env:ChocolateyInstall\lib\elasticsearch\tools\exceptionless-elasticsearch-2.2.0\bin";
+    $elasticSearchPath = "$env:ChocolateyInstall\lib\exceptionless-elasticsearch\tools\elasticsearch-1.7.5\bin";
     cmd /c "set JAVA_HOME=$env:JAVA_HOME& $elasticSearchPath\service.bat install"
     cmd /c "$elasticSearchPath\service.bat start"
 
